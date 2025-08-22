@@ -1,6 +1,6 @@
 import streamlit as st
 from src.helper import extract_text_from_pdf, ask_gemini
-from src.job_api import fetch_linkedin_jobs, fetch_naukri_jobs
+from src.job_api import fetch_linkedin_jobs 
 
 st.set_page_config(page_title="Job Recommender", layout="wide")
 st.title("AI Job Recommender")
@@ -13,14 +13,15 @@ if uploaded_file:
         resume_text = extract_text_from_pdf(uploaded_file)
 
     with st.spinner("Summarizing your resume..."):
-        summary = ask_gemini(f"Summarize this resume highlighting skills, education:\n\n{resume_text}")
+        summary = ask_gemini(f"Summarize this resume highlighting skills and education:\n\n{resume_text}")
 
     with st.spinner("Finding skill gaps..."):
-        gaps = ask_gemini(f"Analyze this resume and highlight missing skills:\n\n{resume_text}")
+        gaps = ask_gemini(f"Analyze this resume and highlight missing skills and certifications:\n\n{resume_text}")
 
     with st.spinner("Creating a future roadmap..."):
         roadmap = ask_gemini(f"Suggest a future career roadmap for this resume:\n\n{resume_text}")
 
+    # Display results
     st.header("Resume Summary")
     st.write(summary)
 
