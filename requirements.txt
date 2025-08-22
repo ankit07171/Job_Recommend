@@ -1,0 +1,5 @@
+streamlit 
+langchain-google-genai  
+pymupdf
+python-dotenv
+apify-client
